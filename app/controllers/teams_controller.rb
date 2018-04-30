@@ -152,6 +152,11 @@ class TeamsController < ApplicationController
     return teams_final
   end
 
+  private
+
+  def team_params
+    params.require(:team).permit(:size)
+  end
 
 end
 
