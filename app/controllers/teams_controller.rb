@@ -9,18 +9,29 @@ class TeamsController < ApplicationController
   end
 
   def new
+    @team = Team.new
   end
 
   def create
+    @team = Team.new(params[:team])
+    @team.save
+    redirect_to team_path(@team)
   end
 
   def edit
+    @team = Team.find(params[:id])
   end
 
   def update
+    @team = Team.find(params[:id])
+    @team.update(params[:team])
+    redirect_to team_path(@team)
   end
 
   def destroy
+    @team = Team.find(params[:id])
+    @team.destroy
+    redirect_to team_path(@team)
   end
 
   def get_players_total
@@ -141,6 +152,11 @@ class TeamsController < ApplicationController
     return teams_final
   end
 
+  private
+
+  def team_params
+    params.require(:team).permit(:size)
+  end
 
 end
 
