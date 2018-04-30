@@ -29,7 +29,9 @@ class PlayersController < ApplicationController
   end
 
   def destroy
-
+    @player = Player.find(params[:id])
+    @player.destroy
+    redirect_to player_path(@player)
   end
 
   private
